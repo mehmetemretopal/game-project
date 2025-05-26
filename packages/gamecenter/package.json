@@ -15,5 +15,9 @@
   ],
   "scripts": {
     "test": "node ./__tests__/gamecenter.test.js"
+  },
+  "dependencies": {
+    "react-native-paper": "^5.14.4",
+    "react-native-safe-area-context": "^5.4.0"
   }
 }
