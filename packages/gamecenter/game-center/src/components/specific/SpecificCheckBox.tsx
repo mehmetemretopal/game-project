@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { Platform, StyleSheet, View } from 'react-native'
 import { Checkbox, Text } from 'react-native-paper'
+import { useFonts } from "expo-font";
+import { GlobalTextInput } from '../common/GlobalTextInput';
+import GlobalText from '../common/GlobalText';
 
 interface SpecificCheckBoxProps {
     title: string;
@@ -14,6 +17,9 @@ const SpecificCheckBox:React.FC<SpecificCheckBoxProps> = (props) => {
         setIsChecked(!isChecked);
     };
 
+const [fontsLoaded] = useFonts({
+        ButtonFont: require('../../../assets/fonts/LilitaOne-Regular.ttf')
+    })
     return (
         <View style={styles.check}>
             {Platform.OS === 'ios' ? (
@@ -21,18 +27,29 @@ const SpecificCheckBox:React.FC<SpecificCheckBoxProps> = (props) => {
                     <Checkbox.IOS
                         status={isChecked ? 'checked' : 'unchecked'}
                         onPress={handleToggleCheckbox}
-                        color="blue" // İstediğiniz rengi ayarlayabilirsiniz
+                        color="blue" 
                     />
-                    <Text style={styles.label}>{props.title}</Text>
+                      <GlobalText 
+                    title={props.title}
+                    size={25}
+                    color='black'
+                    
+                    />
                 </View>
             ) : (
                 <View style={styles.checkboxWrapper}>
                     <Checkbox.Android
                         status={isChecked ? 'checked' : 'unchecked'}
                         onPress={handleToggleCheckbox}
-                        color="green" // İstediğiniz rengi ayarlayabilirsiniz
+                        color="white" 
+                        borderless
                     />
-                    <Text style={styles.label}>{props.title}</Text>
+                    <GlobalText 
+                    title={props.title}
+                    size={25}
+                    color='#fff'
+                    
+                    />
                 </View>
             )}
         </View>
@@ -41,21 +58,24 @@ const SpecificCheckBox:React.FC<SpecificCheckBoxProps> = (props) => {
 
 const styles = StyleSheet.create({
     check: {
-        flex:1,
         alignSelf: 'flex-start',
         flexDirection: 'row',
         alignItems: 'center',
         marginHorizontal: 15,
         marginVertical: 10,
+        
 
     },
     checkboxWrapper: {
         flexDirection: 'row',
         alignItems: 'center',
+        
     },
     label: {
+        color:'black',
         marginLeft: 0,
-        fontSize: 16,
+        fontSize: 20,
+        
     },
 });
 
