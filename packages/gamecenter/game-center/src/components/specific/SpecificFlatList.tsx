@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet, Dimensions } from 'react-native';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const DATA = [
     {
@@ -31,29 +32,23 @@ const DATA = [
 
 type ItemProps = {
     title: string;
-    width: number;
-    height: number;
+   
     
 };
 
 
-const Item = ({ title, width, height }: ItemProps) => (
-    <View style={[styles.item, { width: width, height: height, }]}>
+const Item = ({ title }: ItemProps) => (
+    <View style={[styles.item]}>
         <Text style={styles.title}>{title}</Text>
     </View>
 );
 
 
-interface SpecificFlatListProps {
-    itemWidth?: number; 
-    itemHeight?: number; 
-}
 
-const SpecificFlatList: React.FC<SpecificFlatListProps> = ({ itemWidth, itemHeight }) => {
+
+const SpecificFlatList = () => {
    
-    const defaultItemWidth = itemWidth || Dimensions.get('window').width * 0.4;
-    const defaultItemHeight = itemHeight || Dimensions.get('window').width * 0.4;
-
+   
     return (
         <View style={styles.container}>
             <FlatList
@@ -63,8 +58,7 @@ const SpecificFlatList: React.FC<SpecificFlatListProps> = ({ itemWidth, itemHeig
                 renderItem={({ item }) => ( 
                     <Item
                         title={item.title}
-                        width={defaultItemWidth}
-                        height={defaultItemHeight}
+                        
                     />
                 )}
                 keyExtractor={item => item.id}
@@ -77,15 +71,17 @@ const SpecificFlatList: React.FC<SpecificFlatListProps> = ({ itemWidth, itemHeig
 const styles = StyleSheet.create({
     container: {
         flex:1,
-        paddingVertical: 10, 
+        paddingVertical: hp('1%'), 
     },
 
     flatListContent: {
-        paddingHorizontal: 10,
+        paddingHorizontal: wp('1%'),
+        alignItems:'center' 
     },
 
     item: {
-        
+        height:hp('29%'),
+        width:wp('40%'),
         marginRight: 10, 
         borderWidth: 2,
         borderColor: '#333',
