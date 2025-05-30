@@ -33,11 +33,12 @@ type ItemProps = {
     title: string;
     width: number;
     height: number;
+    
 };
 
 
 const Item = ({ title, width, height }: ItemProps) => (
-    <View style={[styles.item, { width: width, height: height }]}>
+    <View style={[styles.item, { width: width, height: height, }]}>
         <Text style={styles.title}>{title}</Text>
     </View>
 );
@@ -51,7 +52,7 @@ interface SpecificFlatListProps {
 const SpecificFlatList: React.FC<SpecificFlatListProps> = ({ itemWidth, itemHeight }) => {
    
     const defaultItemWidth = itemWidth || Dimensions.get('window').width * 0.4;
-    const defaultItemHeight = itemHeight || Dimensions.get('window').width * 0.5;
+    const defaultItemHeight = itemHeight || Dimensions.get('window').width * 0.4;
 
     return (
         <View style={styles.container}>
@@ -59,8 +60,7 @@ const SpecificFlatList: React.FC<SpecificFlatListProps> = ({ itemWidth, itemHeig
                 data={DATA}
                 horizontal
                 showsHorizontalScrollIndicator={false}
-                renderItem={({ item }) => (
-                   
+                renderItem={({ item }) => ( 
                     <Item
                         title={item.title}
                         width={defaultItemWidth}
@@ -76,17 +76,16 @@ const SpecificFlatList: React.FC<SpecificFlatListProps> = ({ itemWidth, itemHeig
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex:1,
         paddingVertical: 10, 
     },
 
     flatListContent: {
-        flex:1,
         paddingHorizontal: 10,
-       
     },
 
     item: {
+        
         marginRight: 10, 
         borderWidth: 2,
         borderColor: '#333',
