@@ -1,55 +1,70 @@
 import React from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
-import { Surface } from 'react-native-paper'; 
+import { Surface } from 'react-native-paper';
 import SpecificFlatList from '../../components/specific/SpecificFlatList';
 import GlobalText from '../../components/common/GlobalText';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const HomePage = () => {
 
   return (
-      <View style={{flex:1,backgroundColor:'gray',margin:hp('2%')}}>
-        <View style={{flex:1,backgroundColor:'red'}}>
-          <View style={{flex:3,backgroundColor:'orange'}}> 
-            <View style={{flex:2,backgroundColor:'pink'}}>
+    <View style={{ flex: 1, backgroundColor: 'gray' }}>
+      <View style={{ flex: 2, backgroundColor: 'red', margin: hp('2%') }}>
+        <View style={{ flex: 3, backgroundColor: 'orange' }}>
+          <View style={{ flex: 2, backgroundColor: 'pink' }}>
             <GlobalText
-            title='Hello'
-            size={hp('2%')}
-            color='#253141'
-            font=''
-          />
-          <GlobalText
-            title='Mehmet Emre'
-            size={hp('2%')}
-            color='#253141'
-            font=''
-          />
-          </View>
-          <View style={{flex:3,backgroundColor:'purple',justifyContent:'center'}}>
+              title='Hello'
+              size={hp('2%')}
+              color='#253141'
+              font=''
+            />
             <GlobalText
-          title='Games'
-          font=''
-          size={hp('6%')}
-          color='#253141'
-        />
+              title='Mehmet Emre'
+              size={hp('2%')}
+              color='#253141'
+              font=''
+            />
           </View>
-          </View>
-          <View style={{flex:7,backgroundColor:'cyan'}}>
-             <SpecificFlatList
-            
-          />
+          <View style={{ flex: 3, backgroundColor: 'purple', justifyContent: 'center' }}>
+            <GlobalText
+              title='Games'
+              font=''
+              size={hp('6%')}
+              color='#253141'
+            />
           </View>
         </View>
-        <View style={{flex:1,backgroundColor:'yellow'}}></View>
-
+        <View style={{ flex: 7, backgroundColor: 'cyan' }}>
+          <SpecificFlatList
+            isHorizontal={true}
+           
+          />
+        </View>
+      </View>
+      <View style={{ flex: 3, backgroundColor: 'yellow', borderTopRightRadius: 40, borderTopLeftRadius: 40 }}>
+        <View style={{ flex: 2, backgroundColor: 'red', margin: hp('2%') }}>
+          <GlobalText
+            title='Lobies'
+            color='#253141'
+            font=''
+            size={hp('6%')}
+          />
+        </View>
+        <View style={{ flex: 12, backgroundColor: 'green' }}>
+       /* <SpecificFlatList
+            isHorizontal={false}
+            numColumns={2}
+           
+          />*/</View>
 
       </View>
+    </View>
   );
-  
+
 };
 
 const styles = StyleSheet.create({
-  
+
 });
 
 export default HomePage;

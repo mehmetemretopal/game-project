@@ -32,36 +32,39 @@ const DATA = [
 
 type ItemProps = {
     title: string;
-   
+    
     
 };
 
 
-const Item = ({ title }: ItemProps) => (
+const Item = ({ title}: ItemProps) => (
     <View style={[styles.item]}>
         <Text style={styles.title}>{title}</Text>
     </View>
 );
 
+interface SpecificFlatListProps{
+    isHorizontal?:boolean;
+    numColumns?:number;
+   }
 
 
-
-const SpecificFlatList = () => {
-   
-   
+const SpecificFlatList:React.FC<SpecificFlatListProps> =
+ ({isHorizontal,numColumns}) => {
     return (
         <View style={styles.container}>
             <FlatList
                 data={DATA}
-                horizontal
+                horizontal={isHorizontal}
                 showsHorizontalScrollIndicator={false}
                 renderItem={({ item }) => ( 
                     <Item
                         title={item.title}
-                        
+                       
                     />
                 )}
                 keyExtractor={item => item.id}
+                numColumns={numColumns}
                 contentContainerStyle={styles.flatListContent} 
             />
         </View>
@@ -75,15 +78,15 @@ const styles = StyleSheet.create({
     },
 
     flatListContent: {
-        paddingHorizontal: wp('1%'),
+        //paddingHorizontal: wp('1%'),
         alignItems:'center' 
     },
 
     item: {
-        height:hp('29%'),
+        height:hp('23%'),
         width:wp('40%'),
-        marginRight: 10, 
-        borderWidth: 2,
+        margin: 10, 
+        borderWidth: wp('0.5%'),
         borderColor: '#333',
         borderRadius: 12,
         justifyContent: 'center',
