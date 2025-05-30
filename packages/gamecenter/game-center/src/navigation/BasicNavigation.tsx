@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Children, PropsWithChildren } from 'react'
 
 import { View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -7,39 +7,40 @@ import { NavigationContainer } from '@react-navigation/native';
 import ProfilePage from '../screens/(tabs)/ProfilePage';
 
 
-export type RootStackParamList = {
-    HomePage: undefined;
-    ProfilePage: { userId: string };
+type RootStackParamList = {
+    Home: undefined;
+    Profile: undefined;
     //Create: undefined; ilerde lobi oluşturulabilir
 }
 
 const Tab = createBottomTabNavigator<RootStackParamList>();
 
-const BasicNavigation = () => {
+const BasicNavigation = ({children}:PropsWithChildren) => {
     return (
         <NavigationContainer>
             <Tab.Navigator>
                 <Tab.Screen
-                    name="HomePage"
+                    name="Home"
                     component={HomePage}
                     options={{
                         headerShown: false,
-                        tabBarLabel: 'Home',
+                        tabBarLabel: '',
                     }}
-                >
-                </Tab.Screen>
+                />
+               
                 <Tab.Screen
-                    name="ProfilePage"
+                    name="Profile"
                     component={ProfilePage}
                     options={{
                         headerShown: false,
-                        tabBarLabel: 'Profile',
+                        tabBarLabel: '',
                     }}
-                >
-                </Tab.Screen>
+                />
+                
             </Tab.Navigator>
         </NavigationContainer>
-    )
+
+    );
 }
 
 export default BasicNavigation

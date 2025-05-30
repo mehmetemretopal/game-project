@@ -27,12 +27,12 @@ const [fontsLoaded] = useFonts({
                     <Checkbox.IOS
                         status={isChecked ? 'checked' : 'unchecked'}
                         onPress={handleToggleCheckbox}
-                        color="blue" 
+                        color="#fff" 
                     />
                       <GlobalText 
                     title={props.title}
                     size={25}
-                    color='black'
+                    color='#fff'
                     
                     />
                 </View>
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
         
     },
     label: {
-        color:'black',
+        color:'#fff',
         marginLeft: 0,
         fontSize: 20,
         

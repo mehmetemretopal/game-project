@@ -15,13 +15,13 @@ const Login = () => {
     return (
 
         
-            <ImageBackground source={require('../../assets/images/bg.png')} style={styles.container}>
+            <View style={styles.container}>
             <GlobalTextInput
                 label="Kullanıcı Adı"
                 placeholder="ENTER YOUR EMAIL ADRESS"
                 value={username}
                 onChangeText={setUsername}
-
+                
 
             />
             <GlobalTextInput
@@ -31,7 +31,6 @@ const Login = () => {
                 onChangeText={setUsername}
 
             />
-
 
             <SpecificCheckBox
                 title='Remember Me' />
@@ -50,8 +49,9 @@ const Login = () => {
                 title='Forget Your Password?'
                 color='#fff'
                 size={20}
+                font=''
             />
-            </ImageBackground>
+            </View>
        
 
     )
@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 5,
+        backgroundColor:'#D3D9FF'
     },
 })
 

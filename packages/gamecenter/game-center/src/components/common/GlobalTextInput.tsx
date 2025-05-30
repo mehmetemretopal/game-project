@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { TextInput } from 'react-native-paper';
 import { useFonts } from "expo-font";
+import GlobalText from './GlobalText';
 
 interface GlobalTextInputProps {
     label: string;
@@ -34,15 +35,15 @@ export const GlobalTextInput: React.FC<GlobalTextInputProps> = (props) => {
                 onChangeText={handleTextChange}
                 style={[styles.textInput, {
                     borderRadius: 20,
-                    borderColor:'#B57BFE',
+                    borderColor:'#fff',
                     borderWidth:3,
                     overflow: 'hidden'
                 }]}
                 
-               activeOutlineColor='#fff'
+               activeOutlineColor='#FDC0FF'
                 theme={{
                     colors: {
-                        onSurfaceVariant: 'gray' // Placeholder rengi
+                        onSurfaceVariant: '#fff' // Placeholder rengi
                     },
                     roundness: 10,
 
@@ -64,10 +65,10 @@ const styles = StyleSheet.create({
     },
 
     content: {
-        backgroundColor: '#fff',
+        backgroundColor: '#D6AFFE',
         fontSize: 20,
         fontFamily:'ButtonFont',
-        color:'gray',
+        color:'#fff',
        
         
     },

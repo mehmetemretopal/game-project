@@ -1,5 +1,5 @@
-import React from 'react'
-import { FlatList, StyleSheet, View,Text } from 'react-native'
+import React from 'react';
+import { View, Text, FlatList, StyleSheet, Dimensions } from 'react-native';
 
 const DATA = [
     {
@@ -7,67 +7,102 @@ const DATA = [
         title: 'First Item',
     },
     {
-        id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+        id: 'bd7acbea-c1b1-46c2-aed5-',
         title: 'Second Item',
     },
     {
-        id: '58694a0f-3da1-471f-bd96-145571e29d72',
+        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb2dsasfsba',
         title: 'Third Item',
     },
     {
-        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28b',
-        title: 'First Item',
+        id: 'bd7acbea-c1b1-46c2-aefdsfsdd5-',
+        title: 'Fourth Item',
     },
     {
-        id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f6',
-        title: 'Second Item',
+        id: 'bd7acbea-c1b1-46c2-aed5-another-id-1',
+        title: 'Fifth Item',
     },
     {
-        id: '58694a0f-3da1-471f-bd96-145571e29d7',
-        title: 'Third Item',
+        id: 'bd7acbea-c1b1-46c2-aed5-another-id-2',
+        title: 'Sixth Item',
     },
 ];
 
-type ItemProps = { title: string };
 
-const Item = ({ title }: ItemProps) => (
-    <View style={styles.item}>
+type ItemProps = {
+    title: string;
+    width: number;
+    height: number;
+};
+
+
+const Item = ({ title, width, height }: ItemProps) => (
+    <View style={[styles.item, { width: width, height: height }]}>
         <Text style={styles.title}>{title}</Text>
     </View>
 );
 
 
-const SpecificFlatList = () => {
+interface SpecificFlatListProps {
+    itemWidth?: number; 
+    itemHeight?: number; 
+}
+
+const SpecificFlatList: React.FC<SpecificFlatListProps> = ({ itemWidth, itemHeight }) => {
+   
+    const defaultItemWidth = itemWidth || Dimensions.get('window').width * 0.4;
+    const defaultItemHeight = itemHeight || Dimensions.get('window').width * 0.5;
+
     return (
         <View style={styles.container}>
             <FlatList
                 data={DATA}
                 horizontal
                 showsHorizontalScrollIndicator={false}
-                renderItem={({ item }) => <Item title={item.title} />}
+                renderItem={({ item }) => (
+                   
+                    <Item
+                        title={item.title}
+                        width={defaultItemWidth}
+                        height={defaultItemHeight}
+                    />
+                )}
                 keyExtractor={item => item.id}
+                contentContainerStyle={styles.flatListContent} 
             />
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-
+        paddingVertical: 10, 
     },
+
+    flatListContent: {
+        flex:1,
+        paddingHorizontal: 10,
+       
+    },
+
     item: {
-       width:80,
-        height: 80,
-        marginRight:5,
-        borderWidth:3,
-        borderColor: '#6200ee',
-        borderRadius: 40,
+        marginRight: 10, 
+        borderWidth: 2,
+        borderColor: '#333',
+        borderRadius: 12,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: '#ADD8E6', 
+        padding: 10, 
     },
+
     title: {
-        fontSize: 12,
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: '#253141',
     },
+
 });
-export default SpecificFlatList
+
+export default SpecificFlatList;

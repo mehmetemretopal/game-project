@@ -5,22 +5,33 @@ import { useFonts } from "expo-font";
 
 interface textInfo {
     title: string
-    size:number
-    color:string
+    size: number
+    color: string
+    padding?: number
+    margin?: number
+    marginVertical?: number
+    marginHorizontal?: number
+    font: string
+
 }
-const GlobalText: React.FC<textInfo> = ({size,title,color}) => {
+const GlobalText: React.FC<textInfo> = ({ size, title, color, padding, font, margin, marginVertical
+    , marginHorizontal }) => {
     const [fontsLoaded] = useFonts({
         ButtonFont: require('../../../assets/fonts/LilitaOne-Regular.ttf')
     });
     return (
         <View>
             <Text style={[
-                {fontSize:size},
-                style.tstyle,
-                {color:color}
-                
-            ]} >
-               
+                { fontSize: size },
+                { color: color },
+                { padding: padding },
+                { margin: margin },
+                { marginVertical: marginVertical },
+                { marginHorizontal: marginHorizontal },
+                { fontFamily: font = 'ButtonFont' }
+            ]
+            } >
+
                 {title}
             </Text>
         </View>
@@ -28,9 +39,6 @@ const GlobalText: React.FC<textInfo> = ({size,title,color}) => {
 }
 
 const style = StyleSheet.create({
-  tstyle:{
-    fontFamily:'ButtonFont'
-    
-  } 
+
 })
 export default GlobalText

@@ -5,12 +5,14 @@ import { PaperProvider } from 'react-native-paper';
 import { GlobalTextInput } from './src/components/common/GlobalTextInput';
 import HomePage from './src/screens/(tabs)/HomePage';
 import BasicNavigation from './src/navigation/BasicNavigation';
+import { NavigationContainer } from '@react-navigation/native';
 
 
 export default function App() {
   return (
-    <PaperProvider>     
-      <Login/>
+
+    <PaperProvider>
+      <BasicNavigation/>
     </PaperProvider>
   );
 }
