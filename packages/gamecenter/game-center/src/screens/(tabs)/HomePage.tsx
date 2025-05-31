@@ -1,16 +1,18 @@
 import React from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import { Surface } from 'react-native-paper';
-import SpecificFlatList from '../../components/specific/SpecificFlatList';
+import SpecificFlatList, { Item, styles } from '../../components/specific/SpecificFlatList';
 import GlobalText from '../../components/common/GlobalText';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { DATA } from '../../services/Data';
+import { DATA2 } from '../../services/Data2';
 
 const HomePage = () => {
 
   return (
     <View style={{ flex: 1, backgroundColor: 'gray' }}>
-      <View style={{ flex: 2, backgroundColor: 'red', margin: hp('2%') }}>
-        <View style={{ flex: 3, backgroundColor: 'orange' }}>
+      <View style={{ flex: 2, backgroundColor: 'red'  }}>
+        <View style={{ flex: 3, backgroundColor: 'orange',margin: hp('2%') }}>
           <View style={{ flex: 2, backgroundColor: 'pink' }}>
             <GlobalText
               title='Hello'
@@ -34,10 +36,14 @@ const HomePage = () => {
             />
           </View>
         </View>
-        <View style={{ flex: 7, backgroundColor: 'cyan' }}>
+        <View style={{ flex: 7, backgroundColor: 'cyan'  }}>
           <SpecificFlatList
             isHorizontal={true}
-           
+           data={DATA}
+           renderItem={({ item }) => ( <Item
+            style={styles.item}
+            title={item.title} />)}
+          
           />
         </View>
       </View>
@@ -51,21 +57,21 @@ const HomePage = () => {
           />
         </View>
         <View style={{ flex: 12, backgroundColor: 'green' }}>
-       /* <SpecificFlatList
-            isHorizontal={false}
-            numColumns={2}
-           
-          />*/</View>
-
+          <SpecificFlatList
+          isHorizontal={false}
+          data={DATA2}
+          numColumns={2}
+          renderItem={({ item }) => ( <Item
+            style={[styles.item]}
+            title={item.title} />)}
+          />
+          </View>
       </View>
     </View>
   );
 
 };
 
-const styles = StyleSheet.create({
-
-});
 
 export default HomePage;
 

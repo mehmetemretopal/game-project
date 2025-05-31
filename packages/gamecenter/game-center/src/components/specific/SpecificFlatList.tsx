@@ -1,98 +1,70 @@
-import React from 'react';
-import { View, Text, FlatList, StyleSheet, Dimensions } from 'react-native';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import React, { PropsWithChildren } from 'react';
+import { View, Text, FlatList, StyleSheet, Dimensions, ListRenderItemInfo, ListRenderItem, StyleProp, ViewStyle } from 'react-native';
+import { RenderProps } from 'react-native-paper/lib/typescript/components/TextInput/types';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp, heightPercentageToDP } from 'react-native-responsive-screen';
 
-const DATA = [
-    {
-        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-        title: 'First Item',
-    },
-    {
-        id: 'bd7acbea-c1b1-46c2-aed5-',
-        title: 'Second Item',
-    },
-    {
-        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb2dsasfsba',
-        title: 'Third Item',
-    },
-    {
-        id: 'bd7acbea-c1b1-46c2-aefdsfsdd5-',
-        title: 'Fourth Item',
-    },
-    {
-        id: 'bd7acbea-c1b1-46c2-aed5-another-id-1',
-        title: 'Fifth Item',
-    },
-    {
-        id: 'bd7acbea-c1b1-46c2-aed5-another-id-2',
-        title: 'Sixth Item',
-    },
-];
+
 
 
 type ItemProps = {
     title: string;
-    
-    
+    style:StyleProp<ViewStyle>
 };
 
 
-const Item = ({ title}: ItemProps) => (
-    <View style={[styles.item]}>
+export const Item = ({ title,style }: ItemProps) => (
+    <View style={style}>
         <Text style={styles.title}>{title}</Text>
     </View>
 );
 
-interface SpecificFlatListProps{
-    isHorizontal?:boolean;
-    numColumns?:number;
-   }
+interface SpecificFlatListProps {
+    isHorizontal?: boolean;
+    numColumns?: number;
+    data:ArrayLike<any>
+    renderItem:ListRenderItem<any>
+}
 
 
-const SpecificFlatList:React.FC<SpecificFlatListProps> =
- ({isHorizontal,numColumns}) => {
-    return (
-        <View style={styles.container}>
-            <FlatList
-                data={DATA}
-                horizontal={isHorizontal}
-                showsHorizontalScrollIndicator={false}
-                renderItem={({ item }) => ( 
-                    <Item
-                        title={item.title}
-                       
-                    />
-                )}
-                keyExtractor={item => item.id}
-                numColumns={numColumns}
-                contentContainerStyle={styles.flatListContent} 
-            />
-        </View>
-    );
-};
+const SpecificFlatList: React.FC<SpecificFlatListProps> =
+    ({ isHorizontal, numColumns,data,renderItem}) => {
+        return (
+            <View style={styles.container}>
+                <FlatList
+                    data={data}
+                    horizontal={isHorizontal}
+                    showsHorizontalScrollIndicator={false}
+                    renderItem={renderItem}
+                    keyExtractor={item => item.id}
+                    numColumns={numColumns}
+                    contentContainerStyle={styles.flatListContent} 
+                />
+            </View>
+        );
+    };
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
     container: {
-        flex:1,
-        paddingVertical: hp('1%'), 
+        flex: 1,
+        paddingVertical: hp('1%'),
     },
 
     flatListContent: {
         //paddingHorizontal: wp('1%'),
-        alignItems:'center' 
+        alignItems: 'center'
     },
 
     item: {
-        height:hp('23%'),
-        width:wp('40%'),
-        margin: 10, 
+        //height:hp('15%'),
+        width: wp('30%'),
+        margin: 10,
         borderWidth: wp('0.5%'),
         borderColor: '#333',
-        borderRadius: 12,
+        borderRadius:hp('15%'),
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#ADD8E6', 
-        padding: 10, 
+        backgroundColor: '#ADD8E6',
+        padding: 10,
     },
 
     title: {
@@ -104,3 +76,5 @@ const styles = StyleSheet.create({
 });
 
 export default SpecificFlatList;
+
+//({ item }) => ( <Item title={item.title} />)

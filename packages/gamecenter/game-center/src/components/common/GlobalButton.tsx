@@ -37,7 +37,8 @@ export const GlobalButton: React.FC<GlobalButtonProps> = (props) => {
                 <GlobalText
                     title='LOGIN'
                     size={30}
-                    color='#fff' />
+                    color='#fff'
+                    font='' />
             </Button>
         </View>
     )

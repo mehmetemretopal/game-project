@@ -33,6 +33,7 @@ const [fontsLoaded] = useFonts({
                     title={props.title}
                     size={25}
                     color='#fff'
+                    font={''} 
                     
                     />
                 </View>
@@ -45,10 +46,10 @@ const [fontsLoaded] = useFonts({
                         borderless
                     />
                     <GlobalText 
-                    title={props.title}
-                    size={25}
-                    color='#fff'
-                    
+                            title={props.title}
+                            size={25}
+                            color='#fff' 
+                            font={''}                    
                     />
                 </View>
             )}
