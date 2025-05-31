@@ -6,13 +6,14 @@ import { GlobalTextInput } from './src/components/common/GlobalTextInput';
 import HomePage from './src/screens/(tabs)/HomePage';
 import BasicNavigation from './src/navigation/BasicNavigation';
 import { NavigationContainer } from '@react-navigation/native';
+import SpecificCard from './src/components/specific/SpecificCard';
 
 
 export default function App() {
   return (
 
     <PaperProvider>
-      <BasicNavigation/>
+      <HomePage/>
     </PaperProvider>
   );
 }

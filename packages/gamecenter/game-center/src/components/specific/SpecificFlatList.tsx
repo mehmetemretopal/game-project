@@ -55,12 +55,12 @@ export const styles = StyleSheet.create({
     },
 
     item: {
-        //height:hp('15%'),
-        width: wp('30%'),
+        height:hp('20%'),
+        width: wp('35%'),
         margin: 10,
         borderWidth: wp('0.5%'),
         borderColor: '#333',
-        borderRadius:hp('15%'),
+        borderRadius:hp('2%'),
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#ADD8E6',
