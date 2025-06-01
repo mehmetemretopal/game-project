@@ -58,14 +58,12 @@ const HomePage = () => {
           />
         </View>
         <View style={{ flex: 12, backgroundColor: 'green' }}>
-          
         <FlatList
         data={DATA2}
         renderItem={({ item }) => 
         <SpecificCard {...item} imageUrl={{ uri: item.imageUrl }} />}
         keyExtractor={item => item.id}
-        numColumns={2} // To display two cards per row
-        contentContainerStyle={styless.listContainer} // Style for the content
+        numColumns={2} 
       />
          
         </View>
@@ -81,9 +79,7 @@ const styless = StyleSheet.create({
     flex: 1,
     marginTop: 20, // Add some top margin
   },
-  listContainer: {
-    paddingHorizontal: wp('2.5%'), // Add horizontal padding for the whole list
-  },
+  
 });
 
 export default HomePage;

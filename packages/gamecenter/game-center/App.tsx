@@ -13,7 +13,7 @@ export default function App() {
   return (
 
     <PaperProvider>
-      <HomePage/>
+      <BasicNavigation/>
     </PaperProvider>
   );
 }

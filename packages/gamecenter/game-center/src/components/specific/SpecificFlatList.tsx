@@ -60,7 +60,7 @@ export const styles = StyleSheet.create({
         margin: 10,
         borderWidth: wp('0.5%'),
         borderColor: '#333',
-        borderRadius:hp('2%'),
+        borderRadius:hp('5%'),
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#ADD8E6',
