@@ -1,10 +1,16 @@
-import React from 'react';
-import { View } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { Modal, Portal, Button, PaperProvider, SegmentedButtons } from 'react-native-paper';
+import { Modal, Portal, Button, PaperProvider, SegmentedButtons, Chip } from 'react-native-paper';
 import { DatePickerInput, TimePickerModal } from 'react-native-paper-dates'; // DatePickerInput'u da import ettik
 import GlobalText from '../../components/common/GlobalText';
 import { GlobalTextInput } from '../../components/common/GlobalTextInput';
+import { DATA } from '../../services/Data';
+import SectionedMultiSelect from 'react-native-sectioned-multi-select';
+import { MaterialIcons as Icon, Ionicons } from '@expo/vector-icons';
+import { DATA2 } from '../../services/Data2';
+import iconSet from '@expo/vector-icons/build/FontAwesome6';
+import { SelectCountry } from 'react-native-element-dropdown';
 
 type DateRange = {
     startDate: Date | undefined;
@@ -30,22 +36,28 @@ const CreateLobi = () => {
     const onConfirmTimePicker = React.useCallback(
         ({ hours, minutes }: { hours: number; minutes: number }) => {
             setSelectedTime({ hours, minutes });
-            setIsTimePickerVisible(false); 
+            setIsTimePickerVisible(false);
             console.log('Seçilen Saat:', { hours, minutes });
         },
         [setSelectedTime]
     );
 
-   
+
     const handleActivityButtonPress = () => {
         setIsMainModalVisible(true);
     };
 
-    
+    const [selectedItems, setSelectedItems] = useState<number[]>([1]);
+    console.log('Selected:', selectedItems);
+
     const handleDoneButtonPress = () => {
         setIsMainModalVisible(false);
         console.log("Son Seçim - Başlangıç Tarihi:", startDate, "Bitiş Tarihi:", endDate, "Saat:", selectedTime);
     };
+
+
+
+    const [country, setCountry] = useState('1');
 
     const modalContainerStyle = {
         backgroundColor: 'white',
@@ -56,10 +68,127 @@ const CreateLobi = () => {
     };
 
     return (
-        
-            <View style={{ flex: 1, margin: hp('3%'), backgroundColor: '#253141', borderRadius: 10 }}>
+
+        <View style={{ flex: 1, margin: hp('3%'), backgroundColor: '#253141', borderRadius: 10 }}>
+            <GlobalText
+                title='Lobby Name'
+                font=''
+                size={hp('4%')}
+                color='#fff'
+                marginHorizontal={hp('2.5%')}
+            />
+            <GlobalTextInput
+                label="Lobby Adı"
+                placeholder="Enter lobby name"
+                value={lobbyName}
+                onChangeText={setLobbyName}
+                contentStyle={{
+                    backgroundColor: 'gray',
+                    fontSize: 20,
+                    fontFamily: 'ButtonFont',
+                    color: '#fff',
+                }}
+            />
+
+            <GlobalText
+                title='Lobby Status'
+                font=''
+                size={hp('4%')}
+                color='#fff'
+                marginHorizontal={hp('2.5%')}
+                marginVertical={wp('2%')}
+            />
+
+            <View style={{ alignItems: 'center' }}>
+                <SegmentedButtons
+                    value={lobbyStatus}
+                    onValueChange={setLobbyStatus}
+                    style={{ width: wp('80%') }}
+                    buttons={[
+                        {
+                            value: 'activity',
+                            label: 'Activity',
+                            onPress: handleActivityButtonPress,
+                        },
+                        {
+                            value: 'normal',
+                            label: 'Normal',
+                            onPress: () => console.log('Normal button pressed'),
+                        },
+                    ]}
+                />
+
+                <Portal>
+                    <Modal
+                        visible={isMainModalVisible}
+                        onDismiss={handleDoneButtonPress}
+                        contentContainerStyle={modalContainerStyle}
+                    >
+                        <View style={{ padding: 10 }}>
+                            <GlobalText
+                                title='Select Date & Time for Activity'
+                                size={hp('3%')}
+                                color='#333'
+                                font=''
+                            />
+
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 15 }}>
+
+                                <DatePickerInput
+                                    locale="en"
+                                    label="Start Date"
+                                    value={startDate}
+                                    onChange={(d) => setStartDate(d)}
+                                    inputMode="start"
+                                    style={{ width: wp('40%') - 10 }}
+                                    mode="outlined"
+                                />
+
+                                <DatePickerInput
+                                    locale="en"
+                                    label="End Date"
+                                    value={endDate}
+                                    onChange={(d) => setEndDate(d)}
+                                    inputMode="end"
+                                    style={{ width: wp('40%') - 10 }}
+                                    mode="outlined"
+                                />
+                            </View>
+
+                            <Button
+                                onPress={() => setIsTimePickerVisible(true)}
+                                uppercase={false}
+                                mode="outlined"
+                                style={{ marginBottom: 20 }}
+                            >
+                                {selectedTime ? `Time: ${selectedTime.hours}:${selectedTime.minutes < 10 ? '0' + selectedTime.minutes : selectedTime.minutes}` : 'Pick Time'}
+                            </Button>
+
+
+                            <TimePickerModal
+                                visible={isTimePickerVisible}
+                                onDismiss={onDismissTimePicker}
+                                onConfirm={onConfirmTimePicker}
+                                hours={selectedTime?.hours || 12}
+                                minutes={selectedTime?.minutes || 0}
+                            />
+
+
+                            <Button
+                                onPress={handleDoneButtonPress}
+                                mode="contained"
+                            >
+                                Done
+                            </Button>
+                        </View>
+                    </Modal>
+                </Portal>
+
+            </View>
+            <View style={{ marginTop: 20 }}>
+
                 <GlobalText
-                    title='Lobby Name'
+                    title='Lobby Password'
                     font=''
                     size={hp('4%')}
                     color='#fff'
@@ -67,7 +196,7 @@ const CreateLobi = () => {
                 />
                 <GlobalTextInput
                     label="Lobby Adı"
-                    placeholder="Enter lobby name"
+
                     value={lobbyName}
                     onChangeText={setLobbyName}
                     contentStyle={{
@@ -78,103 +207,65 @@ const CreateLobi = () => {
                     }}
                 />
 
-                <GlobalText
-                    title='Lobby Status'
+                <View style={{flexDirection:'column'}}>
+
+                     <GlobalText
+                    title='Select Game'
                     font=''
                     size={hp('4%')}
                     color='#fff'
                     marginHorizontal={hp('2.5%')}
-                    marginVertical={wp('2%')}
                 />
-
-                <View style={{ alignItems: 'center' }}>
-                    <SegmentedButtons
-                        value={lobbyStatus}
-                        onValueChange={setLobbyStatus}
-                        style={{ width: wp('80%') }}
-                        buttons={[
-                            {
-                                value: 'activity',
-                                label: 'Activity',
-                                onPress: handleActivityButtonPress,
-                            },
-                            {
-                                value: 'normal',
-                                label: 'Normal',
-                                onPress: () => console.log('Normal button pressed'),
-                            },
-                        ]}
+                    <SelectCountry
+                        style={styles.dropdown}
+                        selectedTextStyle={styles.selectedTextStyle}
+                        placeholderStyle={styles.placeholderStyle}
+                        imageStyle={styles.imageStyle}
+                        iconStyle={styles.iconStyle}
+                        maxHeight={200}
+                        value={country}
+                        data={DATA}
+                        valueField="id"
+                        labelField="title"
+                        imageField="image"
+                        placeholder="Select game"
+                        searchPlaceholder="Search..."
+                        onChange={e => {
+                            setCountry(e.value);
+                        }}
                     />
-
-                    <Portal>
-                        <Modal
-                            visible={isMainModalVisible}
-                            onDismiss={handleDoneButtonPress} 
-                            contentContainerStyle={modalContainerStyle}
-                        >
-                            <View style={{ padding: 10 }}>
-                                <GlobalText
-                                    title='Select Date & Time for Activity'
-                                    size={hp('3%')}
-                                    color='#333'
-                                    font=''
-                                />
-
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 15 }}>
-                                   
-                                    <DatePickerInput
-                                        locale="en"
-                                        label="Start Date"
-                                        value={startDate}
-                                        onChange={(d) => setStartDate(d)}
-                                        inputMode="start"
-                                        style={{ width: wp('40%') - 10 }} 
-                                        mode="outlined"
-                                    />
-                                  
-                                    <DatePickerInput
-                                        locale="en"
-                                        label="End Date"
-                                        value={endDate}
-                                        onChange={(d) => setEndDate(d)}
-                                        inputMode="end"
-                                        style={{ width: wp('40%') - 10 }} 
-                                        mode="outlined"
-                                    />
-                                </View>
-
-                                <Button
-                                    onPress={() => setIsTimePickerVisible(true)}
-                                    uppercase={false}
-                                    mode="outlined"
-                                    style={{ marginBottom: 20 }}
-                                >
-                                    {selectedTime ? `Time: ${selectedTime.hours}:${selectedTime.minutes < 10 ? '0' + selectedTime.minutes : selectedTime.minutes}` : 'Pick Time'}
-                                </Button>
-
-                             
-                                <TimePickerModal
-                                    visible={isTimePickerVisible}
-                                    onDismiss={onDismissTimePicker}
-                                    onConfirm={onConfirmTimePicker}
-                                    hours={selectedTime?.hours || 12}
-                                    minutes={selectedTime?.minutes || 0}
-                                />
-
-
-                                <Button
-                                    onPress={handleDoneButtonPress}
-                                    mode="contained"
-                                >
-                                    Done
-                                </Button>
-                            </View>
-                        </Modal>
-                    </Portal>
                 </View>
             </View>
-       
+        </View>
+
     );
 };
+
+const styles = StyleSheet.create({
+    dropdown: {
+        margin: 16,
+        height: 50,
+        width: 150,
+        backgroundColor: '#EEEEEE',
+        borderRadius: 22,
+        paddingHorizontal: 8,
+    },
+    imageStyle: {
+        width: 24,
+        height: 24,
+        borderRadius: 12,
+    },
+    placeholderStyle: {
+        fontSize: 16,
+    },
+    selectedTextStyle: {
+        fontSize: 16,
+        marginLeft: 8,
+    },
+    iconStyle: {
+        width: 20,
+        height: 20,
+    },
+});
 
 export default CreateLobi;

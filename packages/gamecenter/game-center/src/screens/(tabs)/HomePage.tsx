@@ -49,7 +49,7 @@ const HomePage = () => {
         </View>
       </View>
       <View style={{ flex: 3, borderTopRightRadius: 40,
-         borderTopLeftRadius: 40 ,backgroundColor:'#fff',borderBottomColor:'black',borderWidth:2,borderStyle:'solid'}}>
+         borderTopLeftRadius: 40 ,backgroundColor:'#fff'}}>
         <View style={{ flex: 2, margin: hp('2%') }}>
           <GlobalText
             title='Lobies'

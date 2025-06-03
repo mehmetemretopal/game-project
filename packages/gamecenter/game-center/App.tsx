@@ -15,7 +15,7 @@ export default function App() {
   return (
 
     <PaperProvider>
-      <CreateLobi/>
+      <BasicNavigation/>
     </PaperProvider>
   );
 }
