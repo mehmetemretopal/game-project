@@ -14,14 +14,19 @@ const Login = () => {
     const [username, setUsername] = React.useState("");
     return (
 
-        
-            <View style={styles.container}>
+
+        <View style={styles.container}>
             <GlobalTextInput
                 label="Kullanıcı Adı"
                 placeholder="ENTER YOUR EMAIL ADRESS"
                 value={username}
                 onChangeText={setUsername}
-                
+                contentStyle={{
+                    backgroundColor: '#D6AFFE',
+                    fontSize: 20,
+                    fontFamily: 'ButtonFont',
+                    color: '#fff',
+                }}
 
             />
             <GlobalTextInput
@@ -29,7 +34,12 @@ const Login = () => {
                 placeholder="ENTER YOUR PASSWORD"
                 value={username}
                 onChangeText={setUsername}
-
+                contentStyle={{
+                    backgroundColor: '#D6AFFE',
+                    fontSize: 20,
+                    fontFamily: 'ButtonFont',
+                    color: '#fff',
+                }}
             />
 
             <SpecificCheckBox
@@ -41,9 +51,9 @@ const Login = () => {
             />
             <Divider style={{
                 width: '90%', marginVertical: 20, borderStyle: 'solid',
-                borderWidth: 1, borderRadius: 5,borderColor:'#fff'
+                borderWidth: 1, borderRadius: 5, borderColor: '#fff'
             }}
-                 />
+            />
 
             <GlobalText
                 title='Forget Your Password?'
@@ -51,8 +61,8 @@ const Login = () => {
                 size={20}
                 font=''
             />
-            </View>
-       
+        </View>
+
 
     )
 }
@@ -63,7 +73,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 5,
-        backgroundColor:'#D3D9FF'
+        backgroundColor: '#D3D9FF'
     },
 })
 

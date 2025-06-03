@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, ViewStyle, StyleProp } from 'react-native'
 import { Button } from 'react-native-paper';
 import { useFonts } from "expo-font";
 import GlobalText from './GlobalText';
@@ -9,6 +9,9 @@ import GlobalText from './GlobalText';
 interface GlobalButtonProps {
     onPress: () => void;
     title: string;
+    alignItems?:string;
+    style?:StyleProp<ViewStyle>
+    containerStyle?: StyleProp<ViewStyle>;
 }
 
 
@@ -19,24 +22,28 @@ export const GlobalButton: React.FC<GlobalButtonProps> = (props) => {
 
 
     return (
-        <View style={styles.container}>
+        <View style={[
+           // { width: '90%', alignItems: 'center' }, // Varsayılan stil (isteğe bağlı)
+            props.containerStyle, // Dışarıdan gelen stil
+            //props.alignItems && { alignItems: props.alignItems } // Eğer alignItems prop'u varsa uygula
+        ]}>
             <Button mode='outlined' onPress={props.onPress}
                 uppercase
                 buttonColor='#08B9FF'
                 
-                style={
+               style={[
                     {
                         borderColor: '#fff',
                         borderWidth: 3,
                         width: '50%',
-                       
-                    }
-                }
+                    },
+                    props.style 
+                ]}
 
             >
                 <GlobalText
-                    title='LOGIN'
-                    size={30}
+                    title={props.title}
+                    
                     color='#fff'
                     font='' />
             </Button>
@@ -46,8 +53,8 @@ export const GlobalButton: React.FC<GlobalButtonProps> = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-        width: '90%',
-        alignItems: 'center',
+        //width: '90%',
+        //alignItems: 'center',
     }
     
 })

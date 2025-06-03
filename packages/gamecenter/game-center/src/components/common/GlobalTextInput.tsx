@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleProp, StyleSheet, TextStyle, View } from 'react-native'
 import { TextInput } from 'react-native-paper';
 import { useFonts } from "expo-font";
 import GlobalText from './GlobalText';
@@ -10,6 +10,8 @@ interface GlobalTextInputProps {
     onChangeText: (text: string) => void;
     placeholder?: string;
     secureTextEntry?: boolean;
+    activeOutlineColor?:string;
+    contentStyle?:StyleProp<TextStyle>
 }
 
 export const GlobalTextInput: React.FC<GlobalTextInputProps> = (props) => {
@@ -30,7 +32,7 @@ export const GlobalTextInput: React.FC<GlobalTextInputProps> = (props) => {
                 mode="outlined"
                 placeholder={props.placeholder}
                 secureTextEntry={props.secureTextEntry}
-                contentStyle={styles.content}
+                contentStyle={props.contentStyle}
                 value={props.value || text}
                 onChangeText={handleTextChange}
                 style={[styles.textInput, {
@@ -40,7 +42,7 @@ export const GlobalTextInput: React.FC<GlobalTextInputProps> = (props) => {
                     overflow: 'hidden'
                 }]}
                 
-               activeOutlineColor='#FDC0FF'
+               activeOutlineColor={props.activeOutlineColor}
                 theme={{
                     colors: {
                         onSurfaceVariant: '#fff' // Placeholder rengi

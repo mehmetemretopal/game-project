@@ -7,13 +7,15 @@ import HomePage from './src/screens/(tabs)/HomePage';
 import BasicNavigation from './src/navigation/BasicNavigation';
 import { NavigationContainer } from '@react-navigation/native';
 import SpecificCard from './src/components/specific/SpecificCard';
+import CreateLobi from './src/screens/(tabs)/CreateLobi';
+
 
 
 export default function App() {
   return (
 
     <PaperProvider>
-      <BasicNavigation/>
+      <CreateLobi/>
     </PaperProvider>
   );
 }

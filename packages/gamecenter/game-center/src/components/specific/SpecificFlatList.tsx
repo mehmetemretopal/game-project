@@ -3,9 +3,6 @@ import { View, Text, FlatList, StyleSheet, Dimensions, ListRenderItemInfo, ListR
 import { RenderProps } from 'react-native-paper/lib/typescript/components/TextInput/types';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp, heightPercentageToDP } from 'react-native-responsive-screen';
 
-
-
-
 type ItemProps = {
     title: string;
     style:StyleProp<ViewStyle>

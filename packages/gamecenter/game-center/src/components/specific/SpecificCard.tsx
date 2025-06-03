@@ -22,8 +22,8 @@ const SpecificCard = ({ title, imageUrl, lobistatus }: CardProps) => {
 
         >
             <Card style={{
-                height: hp('30%'), // Increased height for better visibility
-                width: wp('45%'), // Adjusted width to fit multiple cards
+                height: hp('30%'), 
+                width: wp('45%'), 
                 margin: wp('2.5%'), // Added margin for spacing
 
             }}>
