@@ -8,22 +8,24 @@ import ProfilePage from '../screens/(tabs)/ProfilePage';
 import CreateLobi from '../screens/(tabs)/CreateLobi';
 import Ionicons from '@expo/vector-icons/Ionicons'; 
 import { widthPercentageToDP as wp, heightPercentageToDP as hp, heightPercentageToDP } from 'react-native-responsive-screen';
-
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import GameDetailPage from '../screens/(tabs)/GameDetailPage';
 
 
 type RootStackParamList = {
     Home: undefined;
     Profile: undefined;
-    CreateLobi: undefined;
-    //Create: undefined; ilerde lobi oluşturulabilir
+    CreateLobi: undefined;    
 }
 
 const Tab = createBottomTabNavigator<RootStackParamList>();
 
+
+
 const BasicNavigation = () => {
     return (
         <View style={{ flex: 1, backgroundColor: '#f8f8f8' }}>
-            <NavigationContainer>
+           
                 <Tab.Navigator
                     screenOptions={{
                         headerShown: false, 
@@ -104,7 +106,6 @@ const BasicNavigation = () => {
                         }}
                     />
                 </Tab.Navigator>
-            </NavigationContainer>
         </View>
     );
 }

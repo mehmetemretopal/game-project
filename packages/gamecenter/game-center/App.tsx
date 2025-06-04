@@ -10,13 +10,13 @@ import SpecificCard from './src/components/specific/SpecificCard';
 import CreateLobi from './src/screens/(tabs)/CreateLobi';
 
 
-
 export default function App() {
   return (
-
-    <PaperProvider>
-      <BasicNavigation/>
-    </PaperProvider>
+    <NavigationContainer>
+      <PaperProvider>
+        <BasicNavigation />
+      </PaperProvider>
+    </NavigationContainer>
   );
 }
 

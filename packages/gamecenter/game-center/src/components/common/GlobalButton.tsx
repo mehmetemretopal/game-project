@@ -23,9 +23,7 @@ export const GlobalButton: React.FC<GlobalButtonProps> = (props) => {
 
     return (
         <View style={[
-           // { width: '90%', alignItems: 'center' }, // Varsayılan stil (isteğe bağlı)
-            props.containerStyle, // Dışarıdan gelen stil
-            //props.alignItems && { alignItems: props.alignItems } // Eğer alignItems prop'u varsa uygula
+            props.containerStyle, 
         ]}>
             <Button mode='outlined' onPress={props.onPress}
                 uppercase
@@ -43,9 +41,10 @@ export const GlobalButton: React.FC<GlobalButtonProps> = (props) => {
             >
                 <GlobalText
                     title={props.title}
-                    
                     color='#fff'
-                    font='' />
+                    font='' 
+                
+                    />
             </Button>
         </View>
     )

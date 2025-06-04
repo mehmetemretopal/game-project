@@ -1,26 +1,28 @@
-export const DATA = [
+import { ListItem } from "../navigation/StackNavigation";
+
+export const DATA :ListItem[]= [
     {
         title: 'First Item',
-        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+        id: '1',
     },
     {
         title: 'Second Item',
-        id: 'bd7acbea-c1b1-46c2-aed5-',
+        id: '2',
     },
     {
         title: 'Third Item',
-        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb2dsasfsba',
+        id: '3',
     },
     {
         title: 'Fourth Item',
-        id: 'bd7acbea-c1b1-46c2-aefdsfsdd5-',
+        id: '4',
     },
     {
         title: 'Fifth Item',
-        id: 'bd7acbea-c1b1-46c2-aed5-another-id-1',
+        id: '5',
     },
     {
         title: 'Sixth Item',
-        id: 'bd7acbea-c1b1-46c2-aed5-another-id-2',
+        id: '6',
     },
 ];

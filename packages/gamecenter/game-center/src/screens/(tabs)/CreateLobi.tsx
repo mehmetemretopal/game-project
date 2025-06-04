@@ -1,21 +1,14 @@
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { Modal, Portal, Button, PaperProvider, SegmentedButtons, Chip } from 'react-native-paper';
-import { DatePickerInput, TimePickerModal } from 'react-native-paper-dates'; // DatePickerInput'u da import ettik
+import { Modal, Portal, Button, SegmentedButtons } from 'react-native-paper';
+import { DatePickerInput, TimePickerModal } from 'react-native-paper-dates';
 import GlobalText from '../../components/common/GlobalText';
 import { GlobalTextInput } from '../../components/common/GlobalTextInput';
 import { DATA } from '../../services/Data';
-import SectionedMultiSelect from 'react-native-sectioned-multi-select';
-import { MaterialIcons as Icon, Ionicons } from '@expo/vector-icons';
-import { DATA2 } from '../../services/Data2';
-import iconSet from '@expo/vector-icons/build/FontAwesome6';
 import { SelectCountry } from 'react-native-element-dropdown';
+import { GlobalButton } from '../../components/common/GlobalButton';
 
-type DateRange = {
-    startDate: Date | undefined;
-    endDate: Date | undefined;
-};
 
 const CreateLobi = () => {
     const [lobbyName, setLobbyName] = React.useState('My Awesome Lobby');
@@ -55,8 +48,6 @@ const CreateLobi = () => {
         console.log("Son Seçim - Başlangıç Tarihi:", startDate, "Bitiş Tarihi:", endDate, "Saat:", selectedTime);
     };
 
-
-
     const [country, setCountry] = useState('1');
 
     const modalContainerStyle = {
@@ -66,6 +57,10 @@ const CreateLobi = () => {
         alignSelf: 'center' as const,
         borderRadius: 10,
     };
+
+    const [visible, setVisible] = React.useState(false);
+    const showModal = () => setVisible(true);
+    const hideModal = () => setVisible(false);
 
     return (
 
@@ -106,14 +101,14 @@ const CreateLobi = () => {
                     style={{ width: wp('80%') }}
                     buttons={[
                         {
-                            value: 'activity',
-                            label: 'Activity',
-                            onPress: handleActivityButtonPress,
-                        },
-                        {
                             value: 'normal',
                             label: 'Normal',
                             onPress: () => console.log('Normal button pressed'),
+                        },
+                        {
+                            value: 'activity',
+                            label: 'Activity',
+                            onPress: handleActivityButtonPress,
                         },
                     ]}
                 />
@@ -172,8 +167,6 @@ const CreateLobi = () => {
                                 hours={selectedTime?.hours || 12}
                                 minutes={selectedTime?.minutes || 0}
                             />
-
-
                             <Button
                                 onPress={handleDoneButtonPress}
                                 mode="contained"
@@ -183,7 +176,6 @@ const CreateLobi = () => {
                         </View>
                     </Modal>
                 </Portal>
-
             </View>
             <View style={{ marginTop: 20 }}>
 
@@ -207,15 +199,15 @@ const CreateLobi = () => {
                     }}
                 />
 
-                <View style={{flexDirection:'column'}}>
+                <View style={{ flexDirection: 'column' }}>
 
-                     <GlobalText
-                    title='Select Game'
-                    font=''
-                    size={hp('4%')}
-                    color='#fff'
-                    marginHorizontal={hp('2.5%')}
-                />
+                    <GlobalText
+                        title='Select Game'
+                        font=''
+                        size={hp('4%')}
+                        color='#fff'
+                        marginHorizontal={hp('2.5%')}
+                    />
                     <SelectCountry
                         style={styles.dropdown}
                         selectedTextStyle={styles.selectedTextStyle}
@@ -236,6 +228,45 @@ const CreateLobi = () => {
                     />
                 </View>
             </View>
+            <View style={{
+                marginTop: 'auto', marginBottom: 25
+
+            }}>
+                <GlobalButton
+                    style={{ alignSelf: 'center', width: 250 }}
+                    title='Save'
+                    onPress={showModal}
+                />
+            </View>
+            <Portal>
+                <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={styles.containerStyle}>
+                    <View style={{ flexDirection: 'column' }}>
+                        <GlobalText
+                            title={lobbyName}
+                            font=''
+                            size={hp('2%')}
+                            color='black'
+                            marginHorizontal={hp('2.5%')}
+                        />
+                        <GlobalTextInput
+                            label="Lobby Adı"
+
+                            value={lobbyName}
+                            onChangeText={setLobbyName}
+                            contentStyle={{
+                                backgroundColor: 'gray',
+                                fontSize: 20,
+                                fontFamily: 'ButtonFont',
+                                color: '#fff',
+                            }}
+                        />
+                        <GlobalButton
+                            title='Copy'
+                            onPress={() => { console.log("copied"); }}
+                        />
+                    </View>
+                </Modal>
+            </Portal>
         </View>
 
     );
@@ -266,6 +297,11 @@ const styles = StyleSheet.create({
         width: 20,
         height: 20,
     },
+    containerStyle:
+    {
+        backgroundColor: 'white',
+        padding: 20
+    }
 });
 
 export default CreateLobi;

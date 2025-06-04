@@ -7,6 +7,7 @@ type CardProps = {
     title: String;
     imageUrl: ImageSourcePropType;
     lobistatus: any;
+    onPress?:any;
 }
 
 
@@ -15,10 +16,10 @@ export const renderItem = ({ title, imageUrl, lobistatus }: CardProps) => (
     <SpecificCard title={title} imageUrl={imageUrl} lobistatus={lobistatus} />
 );
 
-const SpecificCard = ({ title, imageUrl, lobistatus }: CardProps) => {
+const SpecificCard = ({ title, imageUrl, lobistatus,onPress }: CardProps) => {
     return (
         <TouchableRipple
-            onPress={() => console.log(`Pressed card: ${title}`)}
+            onPress={onPress}
 
         >
             <Card style={{

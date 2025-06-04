@@ -1,41 +1,52 @@
 import React, { PropsWithChildren } from 'react';
-import { View, Text, FlatList, StyleSheet, Dimensions, ListRenderItemInfo, ListRenderItem, StyleProp, ViewStyle } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Dimensions, ListRenderItemInfo, ListRenderItem, StyleProp, ViewStyle, TouchableOpacity } from 'react-native';
 import { RenderProps } from 'react-native-paper/lib/typescript/components/TextInput/types';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp, heightPercentageToDP } from 'react-native-responsive-screen';
 
 type ItemProps = {
     title: string;
-    style:StyleProp<ViewStyle>
+    style: StyleProp<ViewStyle>
+    onPress?: any;
 };
 
 
-export const Item = ({ title,style }: ItemProps) => (
+export const Item = ({ title, style, onPress }: ItemProps) => (
     <View style={style}>
-        <Text style={styles.title}>{title}</Text>
+        <TouchableOpacity
+            onPress={onPress}
+        >
+            <Text style={styles.title}>{title}</Text>
+
+        </TouchableOpacity >
     </View>
 );
 
 interface SpecificFlatListProps {
     isHorizontal?: boolean;
     numColumns?: number;
-    data:ArrayLike<any>
-    renderItem:ListRenderItem<any>
+    data: ArrayLike<any>
+    renderItem: ListRenderItem<any>
+    onPress?: any;
 }
 
 
 const SpecificFlatList: React.FC<SpecificFlatListProps> =
-    ({ isHorizontal, numColumns,data,renderItem}) => {
+    ({ isHorizontal, numColumns, data, renderItem, onPress }) => {
         return (
             <View style={styles.container}>
-                <FlatList
-                    data={data}
-                    horizontal={isHorizontal}
-                    showsHorizontalScrollIndicator={false}
-                    renderItem={renderItem}
-                    keyExtractor={item => item.id}
-                    numColumns={numColumns}
-                    contentContainerStyle={styles.flatListContent} 
-                />
+                <TouchableOpacity
+                    onPress={onPress}
+                >
+                    <FlatList
+                        data={data}
+                        horizontal={isHorizontal}
+                        showsHorizontalScrollIndicator={false}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                        numColumns={numColumns}
+                        contentContainerStyle={styles.flatListContent}
+                    />
+                </TouchableOpacity>
             </View>
         );
     };
@@ -52,12 +63,12 @@ export const styles = StyleSheet.create({
     },
 
     item: {
-        height:hp('20%'),
+        height: hp('20%'),
         width: wp('35%'),
         margin: 10,
         borderWidth: wp('0.5%'),
         borderColor: '#333',
-        borderRadius:hp('5%'),
+        borderRadius: hp('5%'),
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#ADD8E6',
