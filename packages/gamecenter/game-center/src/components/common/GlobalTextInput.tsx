@@ -2,10 +2,12 @@ import React from 'react'
 import { StyleProp, StyleSheet, TextStyle, View } from 'react-native'
 import { TextInput } from 'react-native-paper';
 import { useFonts } from "expo-font";
-import GlobalText from './GlobalText';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
+
 
 interface GlobalTextInputProps {
-    label: string;
+    label?: string;
     value: string;
     onChangeText: (text: string) => void;
     placeholder?: string;
@@ -38,7 +40,7 @@ export const GlobalTextInput: React.FC<GlobalTextInputProps> = (props) => {
                 style={[styles.textInput, {
                     borderRadius: 20,
                     borderColor:'#fff',
-                    borderWidth:3,
+                    borderWidth:wp('1%'),
                     overflow: 'hidden'
                 }]}
                 
@@ -57,13 +59,14 @@ export const GlobalTextInput: React.FC<GlobalTextInputProps> = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-        width: '90%',
+        width: wp('80%'),
         alignSelf: 'center',
         margin: 10
     },
 
     textInput: {
-        width: '100%',
+        width: wp('80%'),
+        height: hp('6%')
     },
 
     content: {

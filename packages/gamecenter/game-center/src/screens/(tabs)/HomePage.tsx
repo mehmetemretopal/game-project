@@ -1,14 +1,22 @@
 import React from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import SpecificFlatList, { Item, styles } from '../../components/specific/SpecificFlatList';
 import GlobalText from '../../components/common/GlobalText';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { DATA } from '../../services/Data';
 import { DATA2 } from '../../services/Data2';
 import SpecificCard from '../../components/specific/SpecificCard';
+import { HomeScreenNavigationProp } from '../../components/common/GlobalTips';
+import { useNavigation } from '@react-navigation/native';
+import { id } from 'react-native-paper-dates';
 
+interface HomeScreenProps {
+  navigation: HomeScreenNavigationProp;
+}
 
-const HomePage = () => {
+const HomePage: React.FC<HomeScreenProps> = () => {
+  const navigation = useNavigation<HomeScreenNavigationProp>();
+
   return (
     <View style={{ flex: 1, backgroundColor: '#E6EDFF' }}>
       <View style={{ flex: 2 }}>
@@ -40,10 +48,18 @@ const HomePage = () => {
           <SpecificFlatList
             isHorizontal={true}
             data={DATA}
-            renderItem={({ item }) => (<Item
-              style={styles.item}
-              title={item.title} />)}
-
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('Detail', {
+                    
+                    id:item.id
+                  });
+                }}
+              >
+                <Item style={styles.item} title={item.title} />
+              </TouchableOpacity>
+            )}
           />
         </View>
       </View>
